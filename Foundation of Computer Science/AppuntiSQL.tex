@@ -228,9 +228,9 @@ The \textbf{schema} of a table is the table name, it's attributes and their type
 
 A \textbf{key} is a minimal subset of attributes that acts as a unique identifier for tuples in a relation.  A key is an implicit constraint on which tuples can be in the relation: so if two tuples agree on the same value of the key, then they must be the same tuples. 
 
-If some informations are missing or not known SQL shows a NULL value.
-To check if a value is NULL the "IS NULL" SQL command is used. 
-SQL offers the possibility to constrain a column to be NOT NULL or supports other constraints such as maximum number of values per attributes.
+If some informations are missing or not known SQL shows a \texttt{NULL} value.
+To check if a value is \texttt{NULL} the \texttt{IS NULL} SQL command is used. 
+SQL offers the possibility to constrain a column to be \texttt{NOT NULL} or supports other constraints such as maximum number of values per attributes.
 Thanks to the schema and constraints, the databases understand the semantics of the data.
 
 \subsection{Constraints in SQL}
@@ -243,8 +243,8 @@ Kinds of constraints are:
 	\item Assertion (any SQL boolean expression)
 \end{itemize}
 %Anche qui, dobbiamo sapere cosa sono i vincoli, ma non così approfonditamente. Just to say it!Poi sempre meglio sapere qualcosa in più che qualcosa in meno.
-When creating a table, we also generate a key using a constraint of UNIQUE or PRIMARY KEY. 
-To declare a Foreign Key, the keyword REFERENCES is placed after an attribute or as an element of the schema and the referenced attribute must be declared (in the table it belongs to) either as a PRIMARY KEY or UNIQUE. 
+When creating a table, we also generate a key using a constraint of \texttt{UNIQUE} or \texttt{PRIMARY KEY}. 
+To declare a Foreign Key, the keyword \texttt{REFERENCES} is placed after an attribute or as an element of the schema and the referenced attribute must be declared (in the table it belongs to) either as a \texttt{PRIMARY KEY} or \texttt{UNIQUE}. 
 Some examples:
 
 \begin{lstlisting}
@@ -293,13 +293,12 @@ Some possible violations may arise from the presence of a foreign key constraint
 \end{enumerate}
 In the former case, such operation is simply rejected. In the latter case, one of the following policies has to be chosen:
 \begin{enumerate}[noitemsep]
-	\item Default: Rejects the modification alike in the former case.
-	\item Cascade: Applies the same changes in table\_2 (i.e. in case of deletion (update) of a row of table\_1, delete (update) all the related tuples of table\_2).
-	\item Set NULL: Change the involved element to NULL.
+	\item \texttt{DEFAULT}: Rejects the modification alike in the former case.
+	\item \texttt{CASCADE}: Applies the same changes in table\_2 (i.e. in case of deletion (update) of a row of table\_1, delete (update) all the related tuples of table\_2).
+	\item \texttt{SET NULL} Change the involved element to \texttt{NULL}.
 \end{enumerate}
-The relative declarative syntax is (located after foreign key declaration): 
-\centerline ON [UPDATE,DELETE] [SET NULL CASCADE] . \\
- If not declared the default option (reject) is intended. Here an example:
+The relative declarative syntax is : \texttt{ON [UPDATE,DELETE] [SET NULL CASCADE]} (located after foreign key declaration). 
+ If not declared the default option (reject) is intended.  An example:
 \begin{lstlisting}
 CREATE TABLE table_1(
 attr_1 CHAR(20) UNIQUE,
@@ -316,13 +315,13 @@ FOREIGN KEY(attr_4)
 );
 \end{lstlisting}
 
-Some other constraint are Attribute-Based checks to constraint on the value of a particular attribute. In this case add CHECK($<$condition$>$) to the declaration for the attribute. We might use the name of the attribute in the condition but any other relation or attribute name must be in a subquery.
+Some other constraints are Attribute-Based checks to constraint on the value of a particular attribute. In this case add \texttt{CHECK($<$condition$>$)} to the declaration for the attribute. We might use the name of the attribute in the condition but any other relation or attribute name must be in a subquery.
 The checks are performed only when a value for that attribute is inserted or updated.
 It can be added as a relation-schema element(like for the foreign key). %FIXME
 
 The last analysed constrain is the Assertion, a database-schema element. It is syntactically defined by: 
 
-CREATE ASSERTION $<$name$>$ CHECK ($<$condition$>$);\\
+\texttt{CREATE ASSERTION $<$name$>$ CHECK ($<$condition$>$)};\\
  the condition may refer to any relation or attribute in the database schema.
 
 For example, if there are two tables, Bars and Drinkers, and we want to assert that there cannot be more bars than drinkers, the code is:
@@ -335,7 +334,7 @@ For example, if there are two tables, Bars and Drinkers, and we want to assert t
 In principle, we must check the assertion after every modification to any relation of the database but a clever system can observe that only certain changes could cause a given assertion to be violated. 
 Problem is the DBMS often can't tell when they need to be checked. %FIXME
 The Triggers let the user decide when to check for any condition.
-An example is when using a foreign key constraint, instead of rejecting insertions with unknown elements, a trigger can add that new element to the original table with other attributes set as NULL.
+An example is when using a foreign key constraint, instead of rejecting insertions with unknown elements, a trigger can add that new element to the original table with other attributes set as \texttt{NULL}.
 \newpage
 \subsection{SQL Data Manipulation Operations}
 
